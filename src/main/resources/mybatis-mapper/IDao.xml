@@ -10,9 +10,15 @@
 					(rfb_seq.nextval, #{param1}, #{param2}, #{param3}, 0, #{param4}, 0, #{param5})
  	</insert>
  	<select id="boardListDao" resultType="com.rubato.home_jj.dto.RfboardDto">
- 		SELECT * FROM rubafreeboard ORDER BY bnum DESC;
+ 		SELECT * FROM rubafreeboard ORDER BY bnum DESC
  	</select>
  	<select id="boardTtalCountDao" resultType="int">
- 		SELECT COUNT(*) FROM rubafreeboard;
+ 		SELECT COUNT(*) FROM rubafreeboard
  	</select>
+ 	<select id="boardContentViewDao" resultType="com.rubato.home_jj.dto.RfboardDto">
+ 		SELECT * FROM rubafreeboard WHERE bnum = #{param1}
+ 	</select>
+ 	<update id="boardHitDao">
+ 		UPDATE rubafreeboard SET bhit = bhit+1 WHERE bnum = #{param1}
+ 	</update>
  </mapper>

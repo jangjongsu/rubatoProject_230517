@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,7 +69,7 @@
         <img src="/resources/img/comm.gif">
         <h2 id="board_title">자유게시판</h2>
         <div id="total_search">
-          <div id="total">▷ 총 5개의 게시물이 있습니다.</div>
+          <div id="total">▷ 총 ${totalCount }개의 게시물이 있습니다.</div>
           <div id="search">
             <div id="select_img"><img src="/resources/img/select_search.gif"></div>
             <div id="search_select">
@@ -89,33 +91,19 @@
             <th>일시</th>
             <th>조회수</th>
           </tr>
+          <c:forEach items="${dtos }" var="dtos">
           <tr>
-            <td class="col1">1</td>
+            <td class="col1">${dtos.bnum }</td>
             <td class="col2">
-              <a href="board_view">까스통님의 선물인 보드카가 정말 독하네요!!!</a>
+              <a href="board_view?bnum=${dtos.bnum }">${dtos.bcontent }</a>
             </td>
-            <td class="col3">루바토</td>
-            <td class="col4">2022-09-30</td>
-            <td class="col5">13</td>
-          </tr>
-          <tr>
-            <td class="col1">2</td>
-            <td class="col2">
-              <a href="board_view">까스통님의 선물인 보드카가 정말 독하네요!!!</a>
+            <td class="col3">${dtos.bname }</td>
+            <td class="col4">
+   	         <c:out value="${fn:substring(dtos.bdate,0,10) }"></c:out>
             </td>
-            <td class="col3">루바토</td>
-            <td class="col4">2022-09-30</td>
-            <td class="col5">13</td>
+            <td class="col5">${dtos.bhit }</td>
           </tr>
-          <tr>
-            <td class="col1">3</td>
-            <td class="col2">
-              <a href="board_view">까스통님의 선물인 보드카가 정말 독하네요!!!</a>
-            </td>
-            <td class="col3">루바토</td>
-            <td class="col4">2022-09-30</td>
-            <td class="col5">13</td>
-          </tr>
+          </c:forEach>
         </table> <!-- 게시판 목록 테이블 끝 -->
         <div id="buttons">
           <div class="col1">◀ 이전 1 다음 ▶</div>
