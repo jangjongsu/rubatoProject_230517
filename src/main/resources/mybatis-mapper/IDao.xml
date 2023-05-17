@@ -3,6 +3,16 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.rubato.home_jj.dao.IDao">
- 
- 
+ 	<insert id="boardWriteDao">
+ 		INSERT INTO 
+			rubafreeboard(bnum, bname, btitle, bcontent, bhit, buserid, breplycount, bfilecount)
+				VALUES
+					(rfb_seq.nextval, #{param1}, #{param2}, #{param3}, 0, #{param4}, 0, #{param5})
+ 	</insert>
+ 	<select id="boardListDao" resultType="com.rubato.home_jj.dto.RfboardDto">
+ 		SELECT * FROM rubafreeboard ORDER BY bnum DESC;
+ 	</select>
+ 	<select id="boardTtalCountDao" resultType="int">
+ 		SELECT COUNT(*) FROM rubafreeboard;
+ 	</select>
  </mapper>
