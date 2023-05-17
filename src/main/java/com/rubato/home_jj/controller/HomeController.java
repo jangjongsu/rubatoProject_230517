@@ -34,6 +34,8 @@ public class HomeController {
 		
 		model.addAttribute("boardDto", dao.boardContentViewDao(bnum));
 		
+		model.addAttribute("replyList", dao.replyListDao(bnum));
+		
 		return "board_view";
 	}
 	@RequestMapping(value = "/board_write")
@@ -66,8 +68,69 @@ public class HomeController {
 		
 		return "redirect:board_list";
 	}
+	@RequestMapping(value = "/search_list")
+	public String seach_list(HttpServletRequest request, Model model) {
+		String searchOption	 = request.getParameter("searchOption");
+		String keyWord = request.getParameter("keyWord");
+		
+		IDao dao = sqlsession.getMapper(IDao.class);
+		
+		if(searchOption.equals("title")) {
+			model.addAttribute("dtos", dao.boardSearchTitleDao(keyWord));
+			model.addAttribute("totalCount", dao.boardSearchTitleDao(keyWord).size());
+		}else if(searchOption.equals("content")){
+			model.addAttribute("dtos", dao.boardSearchContentDao(keyWord));
+			model.addAttribute("totalCount", dao.boardSearchContentDao(keyWord).size());
+		}else {
+			model.addAttribute("dtos", dao.boardSearchWriterDao(keyWord));
+			model.addAttribute("totalCount", dao.boardSearchWriterDao(keyWord).size());
+		}
+		
+		return "board_list";
+	}
+	@RequestMapping(value = "/reply_write")
+	public String reply_write(HttpServletRequest request, Model model) {
+			
+		String rcontent = request.getParameter("rcontent");
+		String bnum = request.getParameter("rorinum");
+		
+		IDao dao = sqlsession.getMapper(IDao.class);
+		
+		
+		
+		dao.replyWriteDao(rcontent, bnum);
+		
+		dao.replyCountDao(bnum);
+		
+		model.addAttribute("boardDto", dao.boardContentViewDao(bnum));
+		model.addAttribute("replyList", dao.replyListDao(bnum));
 	
+		
+		return "board_view";
+	}
+	@RequestMapping(value = "/boradDelete")
+	public String boradDelete(HttpServletRequest request) {
+		
+		String bnum = request.getParameter("bnum");
+		IDao dao = sqlsession.getMapper(IDao.class);
+		dao.boardDeleteDao(bnum);
+		dao.replyDelete2(bnum);
+		
+		return "redirect:board_list";
+	}
 	
-	
-	
+	@RequestMapping(value = "/replyDelete")
+	public String replyDelete(HttpServletRequest request, Model model) {
+		String rnum = request.getParameter("rnum");
+		String rorinum = request.getParameter("rorinum");
+		
+		IDao dao = sqlsession.getMapper(IDao.class);
+		dao.replyCountDownDao(rorinum);
+		dao.replyDelete(rnum);
+		model.addAttribute("boardDto", dao.boardContentViewDao(rorinum));
+		model.addAttribute("replyList", dao.replyListDao(rorinum));
+		
+		return "board_view";
+	}
+
 }

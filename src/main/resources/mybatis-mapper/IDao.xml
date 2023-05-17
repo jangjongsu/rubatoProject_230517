@@ -21,4 +21,39 @@
  	<update id="boardHitDao">
  		UPDATE rubafreeboard SET bhit = bhit+1 WHERE bnum = #{param1}
  	</update>
+ 	<delete id="boardDeleteDao">
+ 		DELETE FROM rubafreeboard WHERE bnum = #{param1}
+ 	</delete>
+ 	
+ 	<select id="boardSearchContentDao" resultType="com.rubato.home_jj.dto.RfboardDto">
+ 		SELECT * FROM rubafreeboard WHERE bcontent LIKE '%' || #{param1} || '%' ORDER BY bnum DESC
+ 	</select>
+ 	<select id="boardSearchTitleDao" resultType="com.rubato.home_jj.dto.RfboardDto">
+ 		SELECT * FROM rubafreeboard WHERE btitle LIKE '%' || #{param1} || '%' ORDER BY bnum DESC
+ 	</select>
+ 	<select id="boardSearchWriterDao" resultType="com.rubato.home_jj.dto.RfboardDto">
+ 		SELECT * FROM rubafreeboard WHERE bname LIKE '%' || #{param1} || '%' ORDER BY bnum DESC
+ 	</select>
+ 	
+ 	
+ 	<!-- 댓글 관련 SQL -->
+ 	<insert id="replyWriteDao">
+ 		INSERT INTO rubareply(rnum, rcontent, rid,  rorinum) VALUES(rfr_seq.nextval, #{param1}, '운영자', #{param2})
+ 	</insert>
+ 	<update id="replyCountDao">
+ 		UPDATE rubafreeboard SET breplycount = breplycount+1 WHERE bnum = #{param1}
+ 	</update>
+ 	<select id="replyListDao" resultType="com.rubato.home_jj.dto.RreplyDto">
+ 		SELECT * FROM rubareply WHERE rorinum = #{param1}
+ 	</select>
+ 	<delete id="replyDelete">
+ 		DELETE FROM rubareply WHERE rnum = #{param1}
+ 	</delete>
+ 	<update id="replyCountDownDao">
+ 		UPDATE rubafreeboard SET breplycount = breplycount-1 WHERE bnum = #{param1}
+ 	</update>
+ 	<delete id="replyDelete2">
+ 		DELETE FROM rubareply WHERE rorinum = #{param1}
+ 	</delete>
+ 	
  </mapper>
