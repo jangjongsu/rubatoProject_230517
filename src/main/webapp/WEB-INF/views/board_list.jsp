@@ -101,6 +101,9 @@
               <c:if test="${dtos.breplycount != 0}">
              	<span style="color:#999999;font-size: 9px;">[${dtos.breplycount}]</span>
               </c:if>
+              <c:if test="${dtos.bfilecount != 0}">
+              	<img width="15" src="/resources/img/file.png">
+              </c:if>
             </td>
             <td class="col3">${dtos.bname }</td>
             <td class="col4">

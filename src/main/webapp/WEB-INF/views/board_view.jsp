@@ -73,7 +73,7 @@
           <span id="info">${boardDto.bname } | 조회수 :  ${boardDto.bhit } | ${boardDto.bdate }</span>
         </div>
         <p id="view_content">
-          ${boardDto.bcontent }
+          ${boardDto.bcontent } 
         </p>
         
         <p id="file_info">
