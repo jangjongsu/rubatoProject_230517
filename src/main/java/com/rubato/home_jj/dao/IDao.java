@@ -28,4 +28,8 @@ public interface IDao {
 	public void replyDelete(String rnum);
 	public void replyDelete2(String rorinum);
 	public void replyCountDownDao(String rorinum);
+
+	//파일관련
+	public void fileIofoCreateDao(int forinum, String fileoriname, String filename, String fileextention, String fileurl);
+
 }

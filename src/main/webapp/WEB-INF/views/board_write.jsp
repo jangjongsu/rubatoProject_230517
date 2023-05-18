@@ -66,7 +66,7 @@
       <section id="main">
         <img src="/resources/img/comm.gif">
         <h2 id="board_title">자유게시판</h2>
-        <form action="board_writeOk" method="post">
+        <form action="board_writeOk" method="post" enctype="multipart/form-data">
         	<div id="write_title"><h2>글쓰기</h2></div>
         	<table>
          	 <tr id="name">
@@ -83,7 +83,7 @@
           	</tr>
           	<tr id="upload">
           	  <td class="col1">업로드 파일</td>
-            	<td class="col2"><input type="file"></td>
+            	<td class="col2"><input type="file" name="files"></td>
           	</tr>
         	</table>
         	<div id="buttons">
