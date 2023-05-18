@@ -63,5 +63,8 @@
  			rubafiles (filenum, forinum, fileoriname, filename, fileextension, fileurl)
  				VALUES (rffile_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, #{param5})
  	</insert>
+ 	<select id="getFileInfoDao" resultType="com.rubato.home_jj.dto.FileDto">
+ 		SELECT * FROM rubafiles WHERE forinum = #{param1}
+ 	</select>
  	
  </mapper>

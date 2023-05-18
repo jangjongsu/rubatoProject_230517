@@ -2,6 +2,7 @@ package com.rubato.home_jj.dao;
 
 import java.util.List;
 
+import com.rubato.home_jj.dto.FileDto;
 import com.rubato.home_jj.dto.RfboardDto;
 import com.rubato.home_jj.dto.RreplyDto;
 
@@ -31,5 +32,6 @@ public interface IDao {
 
 	//파일관련
 	public void fileIofoCreateDao(int forinum, String fileoriname, String filename, String fileextention, String fileurl);
+	public FileDto getFileInfoDao(String forinum);
 
 }

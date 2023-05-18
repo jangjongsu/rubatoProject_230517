@@ -42,6 +42,8 @@ public class HomeController {
 		
 		model.addAttribute("replyList", dao.replyListDao(bnum));
 		
+		model.addAttribute("fileDto", dao.getFileInfoDao(bnum));
+		
 		return "board_view";
 	}
 	@RequestMapping(value = "/board_write")
